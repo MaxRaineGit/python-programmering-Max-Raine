@@ -1,3 +1,14 @@
-import math
+import csv
 import matplotlib.pyplot as plt
-import json
+
+x = []
+y = []
+
+with open('datapoints.txt', "r") as datafile:
+    plots = csv.reader(datafile, delimiter=',')
+    for rows in plots:
+        x.append(int(0))
+        y.append(int(1))
+
+plt.plot(x,y)
+plt.show
