@@ -12,17 +12,22 @@ with open("Labs\\datapoints.txt", "r") as file:
     next(data, None)
     for row in data:
         width, height, label = map(float, row)
-        all_training.append([width, height, label])
+        all_training.append({'width': width, 'height': height, 'label': label})
         if label == 0:
-            pichu_training.append([width, height, label])
+            pichu_training.append({'width': width, 'height': height, 'label': label})
         if label == 1:
-            pikachu_training.append([width, height, label])  
+            pikachu_training.append({'width': width, 'height': height, 'label': label}) 
 
 
-plt.scatter([x[0] for x in pichu_training], [y[1]for y in pichu_training], color = 'red')
-plt.scatter([x[0] for x in pikachu_training], [y[1]for y in pikachu_training], color = 'blue')
+pichu_x = [point['width'] for point in pichu_training]
+pichu_y = [point['height'] for point in pichu_training]
+pikachu_x = [point['width'] for point in pikachu_training]
+pikachu_y = [point['height'] for point in pikachu_training]
+
+plt.scatter(pichu_x, pichu_y, color='red', label='Pichu')
+plt.scatter(pikachu_x, pikachu_y, color='blue', label='Pikachu')
+plt.legend()
 plt.show()
-
 
 def distance(point1, point2):
     return math.sqrt((point1['width'] - point2['width'])**2 + (point1['height'] - point2['height'])**2)
@@ -44,9 +49,9 @@ def find_closest_points(new_point, all_points):
 
     # Determines if new point is pichu or pikachu and asigns them that label
     if pichu > pikachu:
-        label = 0
+        label = "Pichu"
     else:
-        label = 1
+        label = "Pikachu"
 
     return label
 
@@ -58,6 +63,10 @@ with open("Labs\\testpoints.txt", 'r') as testfile:
     for line in testdata:
         if '(' not in line:
             continue
+        # using map to convert the string to float and creating the variables "width" and "Height" while also trimming down testpoints.txt so i can extract them correctly and asign them to the newly created variables.
         width, height = map(float, line.strip().split('(')[1].split(')')[0].split(','))
         testpoints.append({'width': width, 'height': height})
 
+for testpoints in testpoints:
+    testpoints_label = find_closest_points(testpoints, all_training)
+    print(f"{testpoints} is a {testpoints_label}!")
