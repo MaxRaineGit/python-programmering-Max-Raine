@@ -49,3 +49,15 @@ def find_closest_points(new_point, all_points):
         label = 1
 
     return label
+
+
+testpoints = []
+
+with open("Labs\\testpoints.txt", 'r') as testfile:
+    testdata = testfile.readlines()
+    for line in testdata:
+        if '(' not in line:
+            continue
+        width, height = map(float, line.strip().split('(')[1].split(')')[0].split(','))
+        testpoints.append({'width': width, 'height': height})
+
