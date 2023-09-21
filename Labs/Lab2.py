@@ -70,3 +70,14 @@ with open("Labs\\testpoints.txt", 'r') as testfile:
 for testpoints in testpoints:
     testpoints_label = find_closest_points(testpoints, all_training)
     print(f"{testpoints} is a {testpoints_label}!")
+
+try:
+    user_width = float(input("Enter the width: "))
+    user_height = float(input("Enter the height: "))
+
+    user_point = {'width': user_width, 'height': user_height}
+    user_point_label = find_closest_points(user_point, all_training)
+    print(f"{user_point} is a {user_point_label}")
+
+except ValueError:
+    print("Please only use numeric values for width and height, Please try again")
