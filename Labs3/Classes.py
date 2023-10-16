@@ -13,11 +13,6 @@ class Shape:
     @property
     def omkrets(self):
         pass
-
-    def __eq__(self, other):
-        if isinstance(other, Shape):
-            return (self.length, self.width) == (other.length, other.width)
-        return False
     
     def __lt__(self, other):
         if isinstance(other, Shape):
@@ -57,6 +52,11 @@ class Rectangle(Shape):
     def omkrets(self):
         return (self.length + self.width) * 2
     
+    def __eq__(self, other):
+        if isinstance(other, Shape):
+            return (self.length, self.width) == (other.length, other.width)
+        return False
+    
     
 
 class Circle(Shape):
@@ -71,4 +71,9 @@ class Circle(Shape):
     @property
     def omkrets(self):
         return math.pi * self.radius * 2
+    
+    def __eq__(self, other):
+        if isinstance(other, Shape):
+            return (self.radius) == (other.radius)
+        return False
     
