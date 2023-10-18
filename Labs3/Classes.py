@@ -60,6 +60,12 @@ class Rectangle(Shape):
     def omkrets(self):
         return (self.length + self.width) * 2
     
+    def __repr__(self):
+        return f"{self.__class__.__name__} (x = {self.x}, y = {self.y}, lenght = {self.length}, width = {self.width})"
+    
+    def __str__(self):
+        return f"{self.__class__.__name__} at cordinates x = {self.x}, y = {self.y} and the object has a length of {self.length} and a width of {self.width})"
+    
     def __eq__(self, other):
         if isinstance(other, Shape):
             return (self.length, self.width) == (other.length, other.width)
@@ -74,6 +80,9 @@ class Rectangle(Shape):
                 and 
                 self.y - self.width / 2 <= y <= self.y + self.width / 2
             )
+        
+    def is_square(self):
+        return math.isclose(self.length, self.width, rel_tol=1e-9, abs_tol=1e-9)
     
     
 
@@ -90,6 +99,12 @@ class Circle(Shape):
     def omkrets(self):
         return math.pi * self.radius * 2
     
+    def __repr__(self):
+        return f"{self.__class__.__name__} (x = {self.x}, y = {self.y}, Radius = {self.radius})"
+    
+    def __str__(self):
+        return f"{self.__class__.__name__} at cordinates x = {self.x}, y = {self.y} and a radius of {self.radius})"
+    
     def __eq__(self, other):
         if isinstance(other, Shape):
             return (self.radius) == (other.radius)
@@ -101,4 +116,7 @@ class Circle(Shape):
         else:
             distance = math.sqrt((self.x - x) ** 2 + (self.y - y) ** 2)
             return distance <= self.radius
+        
+    def is_unit_circle(self):
+        return math.isclose(self.radius, 1, rel_tol=1e-9, abs_tol=1e-9)
     
