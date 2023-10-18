@@ -16,8 +16,11 @@ class Shape:
         pass
 
     def move_point(self, new_x, new_y):
-        self.x = new_x
-        self.y = new_y
+        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+            raise ValueError("New points must be numeric, either int or float")
+        else:
+            self.x = new_x
+            self.y = new_y
     
     def __lt__(self, other):
         if isinstance(other, Shape):
@@ -63,11 +66,14 @@ class Rectangle(Shape):
         return False
     
     def is_point_inside(self, x, y):
-        return (
-            self.x - self.length / 2 <= x <= self.x - self.length / 2
-            and 
-            self.y - self.width / 2 <= y <= self.y - self.width / 2
-        )
+        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+            raise ValueError("New points must be numeric, either int or float")
+        else:
+            return (
+                self.x - self.length / 2 <= x <= self.x + self.length / 2
+                and 
+                self.y - self.width / 2 <= y <= self.y + self.width / 2
+            )
     
     
 
@@ -90,6 +96,9 @@ class Circle(Shape):
         return False
     
     def is_point_inside(self, x, y):
-        distance = math.sqrt((self.x - x) ** 2 + (self.y - y) ** 2)
-        return distance <= self.radius
+        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
+           raise ValueError("New points must be numeric, either int or float") 
+        else:
+            distance = math.sqrt((self.x - x) ** 2 + (self.y - y) ** 2)
+            return distance <= self.radius
     
